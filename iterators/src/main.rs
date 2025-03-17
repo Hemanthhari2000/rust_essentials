@@ -9,3 +9,17 @@ fn iter_over_array() {
 fn main() {
     iter_over_array();
 }
+
+#[cfg(test)]
+mod tests {
+
+    #[test]
+    fn checking_next_returns_array_elements() {
+        let v1 = [1, 2, 3];
+        let mut v1_iter = v1.iter();
+
+        assert_eq!(v1_iter.next(), Some(&1));
+        assert_eq!(v1_iter.next(), Some(&2));
+        assert_eq!(v1_iter.next(), Some(&3));
+    }
+}
