@@ -1,3 +1,8 @@
+#[derive(PartialEq, Debug)]
+struct Shoe {
+    size: u8,
+}
+
 fn iter_over_array() {
     let v1 = [1, 3, 4, 5, 6, 7];
     let v1_iter = v1.iter();
@@ -6,12 +11,18 @@ fn iter_over_array() {
         println!("{val}");
     }
 }
+
+fn shoes_in_size(shoes: [Shoe; 3], size: u8) -> Vec<Shoe> {
+    shoes.into_iter().filter(|x| x.size == size).collect()
+}
+
 fn main() {
     iter_over_array();
 }
 
 #[cfg(test)]
 mod tests {
+    use super::*;
 
     #[test]
     fn checking_next_returns_array_elements() {
@@ -40,5 +51,14 @@ mod tests {
         let v1_map: Vec<i32> = v1.iter().map(|x| x + 1).collect();
 
         assert_eq!(v1_map, [2, 3, 4]);
+    }
+
+    #[test]
+    fn filter_shoes_by_size() {
+        let shoes = [Shoe { size: 10 }, Shoe { size: 10 }, Shoe { size: 9 }];
+
+        let shoes_that_fit = shoes_in_size(shoes, 10);
+
+        assert_eq!(shoes_that_fit, [Shoe { size: 10 }, Shoe { size: 10 }])
     }
 }
