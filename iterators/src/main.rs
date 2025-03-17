@@ -32,4 +32,13 @@ mod tests {
 
         assert_eq!(total, 6);
     }
+
+    #[test]
+    fn checking_iter_map_returns_another_iter() {
+        let v1 = [1, 2, 3];
+
+        let v1_map: Vec<i32> = v1.iter().map(|x| x + 1).collect();
+
+        assert_eq!(v1_map, [2, 3, 4]);
+    }
 }
